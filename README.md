@@ -1,4 +1,9 @@
-# NYC Crime Analysis (2015-2024)
+# NYC Crime Patterns: A Spatio-Temporal Analysis of Public Safety
+## Final Project Summary Document
+
+**Course**: CS-GY 6313: Information Visualization  
+**Team**: Viz Pro Max  
+**Members**: Siddh Mandirwala (sm12505), Krish Murjani (km6520)  
 
 A comprehensive, interactive data visualization project analyzing crime trends in New York City over the last decade. This application transforms complex NYPD complaint data into an engaging narrative, exploring how crime has evolved through pre-pandemic stability, the COVID-19 shock, and the post-pandemic "new normal."
 
