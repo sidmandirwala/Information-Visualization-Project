@@ -7,7 +7,7 @@ A comprehensive, interactive data visualization project analyzing crime trends i
 
 
 
-## � Key Analysis & Visualizations
+## Key Analysis & Visualizations
 
 This project answers 8 critical questions about NYC crime through interactive data storytelling:
 
@@ -27,6 +27,6 @@ This project is a fully collaborative effort between **Siddh Mandirwala (sm12505
 
 Navigate to [Live Dashbord](https://vizpromax.vercel.app/) in your browser.
 
-## For the full code refer
+## View the notebook
 
 Navigate to [Observable](https://observablehq.com/d/053b56acfb9cc2db) in your browser.
