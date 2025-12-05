@@ -10,9 +10,9 @@ interface Visualization {
     question: string;
     cellName: string;
     analysis: {
-        whatWeFound: string;
-        whyItWorks: string;
-        whatItMeans: string;
+        whatWeFound: React.ReactNode;
+        whyItWorks: React.ReactNode;
+        whatItMeans: React.ReactNode;
     };
 }
 
@@ -23,9 +23,28 @@ const visualizations: Visualization[] = [
         question: "How have overall crime patterns changed over time in NYC?",
         cellName: "chart_q1",
         analysis: {
-            whatWeFound: "Looking at this line chart, three distinct phases jump out: Pre-COVID Stability (2015-2019) where crime hovered between 35K-43K incidents per month; The COVID Crash (Early 2020) where crime dropped 36% almost overnight; and Post-COVID Surge (2021-2024) where crime exceeded pre-pandemic levels, consistently seeing 48K-50K incidents per month.",
-            whyItWorks: "We chose a line chart with temporal filtering because line charts are optimal for continuous temporal data—they let you trace trends and spot inflection points like the COVID dip immediately. The connected points emphasize time's continuity.",
-            whatItMeans: "Current crime levels are at a 10-year high and have been sustained for 3 years. We're in a new equilibrium, not experiencing a temporary deviation. COVID may have reset what 'normal' crime levels look like in NYC."
+            whatWeFound: (
+                <>
+                    <p className="mb-4">Looking at this line chart, three distinct phases jump out:</p>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li><strong className="text-accent">Pre-COVID Stability (2015-2019):</strong> Crime hovered between 35K-43K incidents per month with predictable seasonal patterns.</li>
+                        <li><strong className="text-accent">The COVID Crash (Early 2020):</strong> Crime dropped 36% almost overnight, from 39K to 25K—the lowest point in the decade.</li>
+                        <li><strong className="text-accent">Post-COVID Surge (2021-2024):</strong> Crime didn't just recover; it exceeded pre-pandemic levels, consistently seeing 48K-50K incidents per month.</li>
+                    </ul>
+                </>
+            ),
+            whyItWorks: (
+                <>
+                    <p className="mb-4">We chose a <strong className="text-accent">line chart with temporal filtering</strong> because it is optimal for continuous temporal data.</p>
+                    <p>It allows you to trace trends and spot inflection points like the COVID dip immediately. The connected points emphasize time's continuity better than disconnected bars would.</p>
+                </>
+            ),
+            whatItMeans: (
+                <>
+                    <p className="mb-4">Current crime levels are at a 10-year high and have been sustained for 3 years (2022-2024).</p>
+                    <p>We are in a new equilibrium, not experiencing a temporary deviation. COVID may have reset what "normal" crime levels look like in NYC, with a 15-20% increase over the pre-2020 baseline.</p>
+                </>
+            )
         }
     },
     {
@@ -34,9 +53,31 @@ const visualizations: Visualization[] = [
         question: "Where are crime hotspots located across NYC's five boroughs?",
         cellName: "chart_q2",
         analysis: {
-            whatWeFound: "Brooklyn leads by a significant margin—200K+ more crimes than Manhattan over the decade. Rankings are consistent: Brooklyn (1.4M), Manhattan (1.18M), Bronx (1.05M), Queens (1.02M), Staten Island (210K).",
-            whyItWorks: "We chose a bar chart with sequential color encoding because bar charts are optimal for comparing quantities across categories. The sequential blue color scheme reinforces the magnitude ordering.",
-            whatItMeans: "The consistency of these rankings across time periods suggests structural factors (population, density, economic conditions) drive spatial patterns more than temporary shocks. Even COVID didn't fundamentally reshape the geographic distribution."
+            whatWeFound: (
+                <>
+                    <p className="mb-4">Brooklyn leads by a significant margin—200K+ more crimes than Manhattan over the decade. The rankings are remarkably consistent:</p>
+                    <ol className="list-decimal pl-5 space-y-1 mb-4">
+                        <li>Brooklyn (1.4M)</li>
+                        <li>Manhattan (1.18M)</li>
+                        <li>Bronx (1.05M)</li>
+                        <li>Queens (1.02M)</li>
+                        <li>Staten Island (210K)</li>
+                    </ol>
+                    <p>Staten Island remains an anomaly, consistently representing only 4% of citywide crime despite being 10% of the land area.</p>
+                </>
+            ),
+            whyItWorks: (
+                <>
+                    <p className="mb-4">We chose a <strong className="text-accent">bar chart with sequential color encoding</strong>.</p>
+                    <p>Bar charts are optimal for comparing quantities across categories. The sequential blue color scheme (darker = higher crime) reinforces the magnitude ordering visually.</p>
+                </>
+            ),
+            whatItMeans: (
+                <>
+                    <p className="mb-4">The consistency of these rankings across time periods suggests structural factors (population, density, economic conditions) drive spatial patterns more than temporary shocks.</p>
+                    <p>Even the massive disruption of COVID didn't fundamentally reshape the geographic distribution—it just scaled everything down proportionally.</p>
+                </>
+            )
         }
     },
     {
@@ -45,9 +86,28 @@ const visualizations: Visualization[] = [
         question: "What types of crimes are most prevalent, and how do they vary by location?",
         cellName: "chart_q3",
         analysis: {
-            whatWeFound: "Manhattan's Petit Larceny dominance is striking—nearly double Brooklyn's despite lower total crime. Each borough shows a distinct profile: Manhattan is property crime heavy, while Bronx is assault-heavy.",
-            whyItWorks: "We chose grouped bar charts because they're optimal for comparing multiple categories (crime types) across multiple groups (boroughs) simultaneously.",
-            whatItMeans: "Different boroughs need different interventions. Manhattan needs retail/commercial security, while Brooklyn and Bronx need more focus on assault prevention and community conflict resolution."
+            whatWeFound: (
+                <>
+                    <p className="mb-4">Manhattan's <strong className="text-accent">Petit Larceny</strong> dominance is striking—nearly double Brooklyn's count despite lower total crime. Each borough shows a distinct profile:</p>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li><strong className="text-accent">Manhattan:</strong> Property crime heavy (Petit & Grand Larceny dominate).</li>
+                        <li><strong className="text-accent">Bronx:</strong> Assault-heavy (nearly matching larceny counts).</li>
+                        <li><strong className="text-accent">Brooklyn:</strong> Balanced mix of assault and property crime.</li>
+                    </ul>
+                </>
+            ),
+            whyItWorks: (
+                <>
+                    <p className="mb-4">We chose <strong className="text-accent">grouped bar charts</strong> because they are optimal for comparing multiple categories (crime types) across multiple groups (boroughs) simultaneously.</p>
+                    <p>The categorical color palette helps track specific crime types across different boroughs.</p>
+                </>
+            ),
+            whatItMeans: (
+                <>
+                    <p className="mb-4">Different boroughs need different interventions. One-size-fits-all policies fail here.</p>
+                    <p>Manhattan needs retail/commercial security and transit policing for property crimes. Brooklyn and Bronx need more focus on assault prevention and community conflict resolution.</p>
+                </>
+            )
         }
     },
     {
@@ -56,9 +116,29 @@ const visualizations: Visualization[] = [
         question: "How do different crime types exhibit distinct temporal patterns?",
         cellName: "chart_q4",
         analysis: {
-            whatWeFound: "Crime follows a clear diurnal rhythm: lowest at 5-6am, rising to an afternoon peak at 5pm. The noon spike suggests crimes of opportunity during lunch hours.",
-            whyItWorks: "We chose an area chart to emphasize the cumulative 'volume' of crime throughout the day. The 24-hour x-axis balances detail with readability.",
-            whatItMeans: "Resources should flex throughout the day. 5-6am minimum suggests reduced patrols are reasonable, but afternoon/evening demand 4x higher coverage."
+            whatWeFound: (
+                <>
+                    <p className="mb-4">Crime follows a clear diurnal rhythm:</p>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li><strong className="text-accent">Lowest:</strong> 5-6am (~220 incidents).</li>
+                        <li><strong className="text-accent">Noon Spike:</strong> Crimes of opportunity during lunch hours.</li>
+                        <li><strong className="text-accent">Peak:</strong> 5pm (~920 incidents), staying elevated through the evening.</li>
+                    </ul>
+                    <p className="mt-4">During COVID, this curve flattened significantly, but the classic rhythm has since returned.</p>
+                </>
+            ),
+            whyItWorks: (
+                <>
+                    <p className="mb-4">We chose an <strong className="text-accent">area chart</strong> to emphasize the cumulative "volume" of crime throughout the day.</p>
+                    <p>The 24-hour x-axis balances detail with readability, showing the flow of crime from morning to night.</p>
+                </>
+            ),
+            whatItMeans: (
+                <>
+                    <p className="mb-4">Resources should flex throughout the day.</p>
+                    <p>The 5-6am minimum suggests reduced patrols are reasonable, but afternoon/evening (3pm-8pm) demand 4x higher coverage. The noon spike indicates a need for midday presence in commercial areas.</p>
+                </>
+            )
         }
     },
     {
@@ -67,9 +147,28 @@ const visualizations: Visualization[] = [
         question: "How do crime patterns evolve across both space and time?",
         cellName: "chart_q5",
         analysis: {
-            whatWeFound: "The V-shaped COVID disruption is universal but uneven. Manhattan's drop was most dramatic (16%), while Staten Island remained remarkably flat. Post-COVID, Brooklyn surged 28% and Manhattan 36%.",
-            whyItWorks: "We chose a multi-line chart to show multiple time series simultaneously. Each borough gets its own color-coded line, making it easy to track individual trajectories.",
-            whatItMeans: "Manhattan's volatility suggests its crime is highly sensitive to external economic shocks. Brooklyn's sustained surge is particularly concerning as it's 17% above its pre-COVID baseline."
+            whatWeFound: (
+                <>
+                    <p className="mb-4">The V-shaped COVID disruption is universal but uneven:</p>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li><strong className="text-accent">Manhattan:</strong> Most dramatic drop (16%) due to loss of commuters/tourists.</li>
+                        <li><strong className="text-accent">Staten Island:</strong> Remained remarkably flat, unaffected by the pandemic.</li>
+                        <li><strong className="text-accent">Post-COVID:</strong> Brooklyn surged 28% and Manhattan 36%, both overshooting pre-pandemic levels.</li>
+                    </ul>
+                </>
+            ),
+            whyItWorks: (
+                <>
+                    <p className="mb-4">We chose a <strong className="text-accent">multi-line chart</strong> to show multiple time series simultaneously.</p>
+                    <p>Each borough gets its own color-coded line, making it easy to track individual trajectories and compare recovery rates.</p>
+                </>
+            ),
+            whatItMeans: (
+                <>
+                    <p className="mb-4">Manhattan's volatility suggests its crime is highly sensitive to external economic shocks.</p>
+                    <p>Brooklyn's sustained surge is particularly concerning as it is 17% above its pre-COVID baseline. The recent plateau suggests we have reached a new, higher equilibrium.</p>
+                </>
+            )
         }
     },
     {
@@ -78,9 +177,28 @@ const visualizations: Visualization[] = [
         question: "Where do different types of crimes typically occur?",
         cellName: "chart_q6",
         analysis: {
-            whatWeFound: "Street dominates as the primary crime location. Petit Larceny shows diverse distribution (Chain Store, Subway, Grocery). Assault concentrates in Street and Residence.",
-            whyItWorks: "We chose a Sankey diagram because it's optimal for visualizing flow relationships between categorical dimensions. Flow width encodes quantity.",
-            whatItMeans: "Petit larceny's spread suggests it's opportunistic, requiring environmental design strategies. Residential assault concentration suggests social service interventions may be more effective."
+            whatWeFound: (
+                <>
+                    <p className="mb-4">Street dominates as the primary location, but nuances exist:</p>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li><strong className="text-accent">Petit Larceny:</strong> Diverse spread (Chain Store, Subway, Grocery) reflecting opportunism.</li>
+                        <li><strong className="text-accent">Assault:</strong> Concentrates in Street and Residence (domestic incidents).</li>
+                        <li><strong className="text-accent">Robbery:</strong> Overwhelmingly street-centric, requiring escape routes.</li>
+                    </ul>
+                </>
+            ),
+            whyItWorks: (
+                <>
+                    <p className="mb-4">We chose a <strong className="text-accent">Sankey diagram</strong> because it is optimal for visualizing flow relationships.</p>
+                    <p>The flow width encodes quantity, making it immediately apparent which crime-premise combinations dominate (e.g., the thick flow from Robbery to Street).</p>
+                </>
+            ),
+            whatItMeans: (
+                <>
+                    <p className="mb-4">Petit larceny's spread requires environmental design strategies (surveillance, access control) across many venue types.</p>
+                    <p>Residential assault concentration suggests that social service interventions (domestic violence programs) may be more effective than traditional street policing for these cases.</p>
+                </>
+            )
         }
     },
     {
@@ -89,9 +207,25 @@ const visualizations: Visualization[] = [
         question: "How do crime rates vary across NYC's police precincts?",
         cellName: "chart_q7",
         analysis: {
-            whatWeFound: "Crime hotspots are geographically concentrated and stable. Central Bronx and Central Brooklyn precincts consistently rank highest. Staten Island remains distinctly low-crime.",
-            whyItWorks: "We chose a choropleth map because it's optimal for visualizing geographic distributions. The sequential color scheme intuitively maps to crime intensity.",
-            whatItMeans: "The persistence of hotspots suggests chronic structural issues requiring sustained intervention. Geographic inequality is stark across NYC."
+            whatWeFound: (
+                <>
+                    <p className="mb-4">Crime hotspots are geographically concentrated and stable.</p>
+                    <p className="mb-4"><strong className="text-accent">Central Bronx</strong> and <strong className="text-accent">Central Brooklyn</strong> precincts consistently rank highest (dark red) across all years.</p>
+                    <p>Staten Island remains distinctly low-crime (pale yellow). Even during COVID, the relative rankings of precincts didn't change.</p>
+                </>
+            ),
+            whyItWorks: (
+                <>
+                    <p className="mb-4">We chose a <strong className="text-accent">choropleth map</strong> for visualizing geographic distributions.</p>
+                    <p>The sequential color scheme (yellow to red) intuitively maps to crime intensity. Precinct-level granularity provides actionable detail for resource allocation.</p>
+                </>
+            ),
+            whatItMeans: (
+                <>
+                    <p className="mb-4">The persistence of hotspots suggests chronic structural issues requiring sustained intervention, not just temporary surges.</p>
+                    <p>Geographic inequality is stark: residents in "red" precincts face a fundamentally different safety environment than those in "yellow" ones.</p>
+                </>
+            )
         }
     },
     {
@@ -100,9 +234,27 @@ const visualizations: Visualization[] = [
         question: "What insights emerge when filtering by multiple dimensions simultaneously?",
         cellName: "chart_q8",
         analysis: {
-            whatWeFound: "The dashboard enables hypothesis testing. Time period filtering reveals pandemic impact. Borough + Crime filtering exposes unique signatures like Brooklyn's Petit Larceny afternoon peaks.",
-            whyItWorks: "We chose an interactive dashboard with linked filters because static views can't capture multi-dimensional complexity. The area chart remains consistent across filters.",
-            whatItMeans: "This dashboard transforms crime data from passive reporting to active exploration, enabling precise resource allocation and personalized safety planning."
+            whatWeFound: (
+                <>
+                    <p className="mb-4">The dashboard enables hypothesis testing. For example:</p>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li><strong className="text-accent">Pandemic Impact:</strong> Filtering by time reveals the dramatic drop and subsequent surge.</li>
+                        <li><strong className="text-accent">Unique Signatures:</strong> Brooklyn Petit Larceny shows a distinct afternoon peak (3-4pm) tied to shopping hours, unlike the evening peaks of other crimes.</li>
+                    </ul>
+                </>
+            ),
+            whyItWorks: (
+                <>
+                    <p className="mb-4">We chose an <strong className="text-accent">interactive dashboard</strong> because static views can't capture multi-dimensional complexity.</p>
+                    <p>The consistent area chart allows users to compare patterns across 1,500+ possible filter combinations without learning a new visualization.</p>
+                </>
+            ),
+            whatItMeans: (
+                <>
+                    <p className="mb-4">This transforms crime data from passive reporting to active exploration.</p>
+                    <p>It enables precise resource allocation—if Manhattan larceny peaks at 2pm but Bronx assault peaks at 9pm, patrol schedules can be optimized accordingly.</p>
+                </>
+            )
         }
     }
 ];
@@ -216,15 +368,15 @@ export function VisualizationsTab() {
                                         <div className="grid md:grid-cols-3 gap-12">
                                             <div className="glass p-8 rounded-2xl">
                                                 <h3 className="text-xl font-heading font-bold mb-4 text-accent">What We Found</h3>
-                                                <p className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whatWeFound}</p>
+                                                <div className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whatWeFound}</div>
                                             </div>
                                             <div className="glass p-8 rounded-2xl">
                                                 <h3 className="text-xl font-heading font-bold mb-4 text-accent">Why It Works</h3>
-                                                <p className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whyItWorks}</p>
+                                                <div className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whyItWorks}</div>
                                             </div>
                                             <div className="glass p-8 rounded-2xl">
                                                 <h3 className="text-xl font-heading font-bold mb-4 text-accent">What It Means</h3>
-                                                <p className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whatItMeans}</p>
+                                                <div className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whatItMeans}</div>
                                             </div>
                                         </div>
                                     </div>

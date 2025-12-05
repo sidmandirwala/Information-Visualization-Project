@@ -7,7 +7,30 @@ const homeContent = {
     title: "NYC Crime Patterns: A Spatio-Temporal Analysis of Public Safety",
     problemStatement: `New York City, as one of the most populous and dynamic urban centers in the world, faces complex challenges related to public safety. Crime rates fluctuate based on a multitude of factors including location, time of day, season, and socio-economic conditions. Understanding these patterns is crucial not just for law enforcement, but for policymakers, community leaders, and residents who strive to make the city safer. However, raw crime data is often overwhelming and difficult to interpret without proper visualization and context.`,
     motivation: `The motivation behind this project stems from a desire to democratize access to public safety data. We believe that by transforming abstract numbers into interactive, spatio-temporal visualizations, we can uncover hidden trends that might otherwise go unnoticed. Whether it's identifying hotspots for specific types of crimes or understanding how safety profiles shift between day and night, this analysis aims to empower stakeholders with actionable insights. Our goal is to move beyond simple statistics and provide a narrative-driven exploration of NYC's crime landscape.`,
-    dataDescription: `This analysis utilizes the NYPD Complaint Data Historic dataset, which includes all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department. The dataset provides granular details such as the specific location (latitude/longitude), time of occurrence, crime category, and precinct. We have focused our analysis on recent years to ensure relevance, while also looking at historical trends to provide context. Data preprocessing involved cleaning missing values, normalizing time formats, and categorizing crime types for clearer visualization.`
+    dataDescription: (
+        <>
+            <p className="mb-6">
+                This analysis utilizes the NYPD Complaint Data Historic dataset (2015-2024), comprising over 7 million records of reported felonies, misdemeanors, and violations.
+            </p>
+
+            <div className="space-y-6">
+                <div>
+                    <strong className="text-accent block mb-2 text-lg">Attributes Used</strong>
+                    <p>We analyze temporal fields (date, time), spatial attributes (latitude, longitude, precinct), and categorical variables (offense description, premises type).</p>
+                </div>
+
+                <div>
+                    <strong className="text-accent block mb-2 text-lg">Preprocessing</strong>
+                    <p>Data cleaning involved removing records with missing coordinates (~5%), standardizing offense descriptions, and filtering for the 10-year period to focus on recent trends.</p>
+                </div>
+
+                <div>
+                    <strong className="text-accent block mb-2 text-lg">Data Quality & Ethics</strong>
+                    <p>While the dataset is comprehensive, it represents <em>reported</em> crimes only. We acknowledge that reporting rates vary by community and crime type. Our analysis focuses on spatio-temporal patterns rather than victim/suspect demographics to avoid stigmatization.</p>
+                </div>
+            </div>
+        </>
+    )
 };
 
 const Section = ({ title, children, delay = 0 }: { title: string; children: React.ReactNode; delay?: number }) => (
@@ -73,7 +96,20 @@ export function HomeTab() {
             </Section>
 
             <Section title="Data Description">
-                <p>{homeContent.dataDescription}</p>
+                {homeContent.dataDescription}
+            </Section>
+
+            <Section title="Links">
+                <a href="https://observablehq.com/d/053b56acfb9cc2db" target="_blank" rel="noopener noreferrer">
+                    <button className="bg-accent text-text px-6 py-2 mr-5 rounded-full hover:bg-accent/80 transition-colors duration-200">
+                        Open Observable Notebook
+                    </button>
+                </a>
+                <a href="https://github.com/sidmandirwala/Information-Visualization-Project" target="_blank" rel="noopener noreferrer">
+                    <button className="bg-accent text-text px-6 py-2 rounded-full hover:bg-accent/80 transition-colors duration-200">
+                        Open GitHub Repository
+                    </button>
+                </a>
             </Section>
         </div>
     );

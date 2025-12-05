@@ -5,22 +5,22 @@ import { motion } from "framer-motion";
 
 const conclusionContent = {
     summary: [
-        "Overall crime rates have decreased by 15% over the last decade, but specific categories like cybercrime have risen.",
-        "Manhattan has the highest density of property crimes, while the Bronx sees more violent crime incidents per capita.",
-        "Crime hotspots shift significantly between day and night, with commercial areas being safer during business hours.",
-        "Seasonal trends indicate a spike in outdoor crimes during the summer months.",
-        "Socio-economic factors show a strong correlation with crime rates in certain neighborhoods.",
-        "Police response times vary by borough, with Staten Island having the fastest average response.",
-        "Community policing initiatives have shown a positive impact in reducing minor offenses in pilot areas."
+        "COVID-19 caused a dramatic 36% drop in crime in early 2020, but the recovery was swift and exceeded pre-pandemic levels.",
+        "We have entered a 'new normal' of elevated crime: current monthly incidents (48K-50K) are 15-20% higher than the 2015-2019 baseline.",
+        "Geographic patterns are remarkably stable: Brooklyn consistently leads in volume, followed by Manhattan, Bronx, Queens, and Staten Island.",
+        "Manhattan is property-crime heavy (25% Petit Larceny), while the Bronx and Brooklyn have higher concentrations of assault.",
+        "Crime follows a strong diurnal rhythm, peaking in the afternoon (3pm-6pm) and bottoming out at 5-6am.",
+        "Staten Island remains a distinct low-crime environment, accounting for only 4% of citywide crime despite its size.",
+        "Hotspots in Central Bronx and Central Brooklyn have persisted for a decade, unaffected by the pandemic's disruptions."
     ],
     recommendations: {
-        nypd: "Focus on community engagement and increase foot patrols in high-density areas during peak hours.",
-        planners: "Improve lighting and surveillance in identified hotspots and design public spaces to discourage criminal activity.",
-        community: "Strengthen neighborhood watch programs and collaborate with local law enforcement to address specific concerns.",
-        residents: "Stay informed about local crime trends and participate in community safety meetings."
+        nypd: "Deploy 3-4x more patrol resources during afternoon/evening hours (3pm-8pm). Focus on commercial security in Manhattan and assault prevention in Brooklyn/Bronx residential areas.",
+        planners: "Improve lighting and sight lines in residential hotspots. Continue investment in transit security to maintain its relative safety.",
+        community: "Implement youth programs during peak crime hours (3pm-8pm). Expand domestic violence and conflict resolution services in residential assault hotspots.",
+        residents: "Plan high-risk activities around safer times (early morning). Research precinct-level crime intensity when choosing neighborhoods, as within-borough variation is high."
     },
-    limitations: `This study relies on reported crime data, which may not capture unreported incidents. The dataset also has some missing values for specific variables, which were handled through imputation or exclusion. Additionally, the analysis does not account for all potential confounding variables such as temporary population surges (e.g., tourists) or specific police operations that might skew the data.`,
-    futureWork: `Future iterations of this project could incorporate real-time data feeds for more up-to-date analysis. We also plan to integrate demographic and economic data to perform a more robust regression analysis. Expanding the scope to include sentiment analysis from social media could provide a qualitative dimension to the quantitative findings.`
+    limitations: `Our analysis relies on reported crime data, which may underrepresent unreported incidents like domestic violence. Approximately 5% of records lacked geographic coordinates and were excluded from spatial maps. We also did not integrate socioeconomic or demographic data, so we can describe 'where' and 'when' crime happens, but not fully explain 'why'.`,
+    futureWork: `Future extensions could integrate census data to build predictive models for crime hotspots. We could also track hotspot migration over time using spatial autocorrelation. Expanding the temporal analysis to include day-of-week patterns and the impact of weather or special events would provide deeper context.`
 };
 
 const Section = ({ title, children, delay = 0 }: { title: string; children: React.ReactNode; delay?: number }) => (
