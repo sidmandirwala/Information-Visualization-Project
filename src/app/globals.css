@@ -15,7 +15,7 @@
   --color-accent: var(--accent);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
-  
+
   --font-sans: var(--font-inter), sans-serif;
   --font-heading: var(--font-space-grotesk), sans-serif;
 }
@@ -62,4 +62,15 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* Tooltip Styling Override */
+#viz-tooltip {
+  color: #0f172a !important;
+  /* Dark text for white background */
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  z-index: 10000 !important;
+  font-weight: 500 !important;
 }

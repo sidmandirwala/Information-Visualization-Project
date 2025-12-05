@@ -30,5 +30,5 @@ export function ObservableNotebook({ cellName }: ObservableNotebookProps) {
         };
     }, [cellName]);
 
-    return <div ref={ref} className="w-full h-full" />;
+    return <div ref={ref} className="w-full h-full flex justify-center items-center [&_svg]:max-w-full [&_svg]:h-auto" />;
 }

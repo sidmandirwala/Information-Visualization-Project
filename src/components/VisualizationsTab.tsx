@@ -124,21 +124,11 @@ export function VisualizationsTab() {
         };
     }, [selectedId]);
 
-    const handleNext = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        const nextIndex = (selectedIndex + 1) % visualizations.length;
-        setSelectedId(visualizations[nextIndex].id);
-    };
 
-    const handlePrev = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        const prevIndex = (selectedIndex - 1 + visualizations.length) % visualizations.length;
-        setSelectedId(visualizations[prevIndex].id);
-    };
 
     return (
         <div className="min-h-screen pt-32 pb-20 px-6">
-            <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="max-w-[95vw] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {visualizations.map((viz, index) => (
                     <motion.div
                         key={viz.id}
@@ -146,104 +136,101 @@ export function VisualizationsTab() {
                         onClick={() => setSelectedId(viz.id)}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="glass-card rounded-2xl p-6 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/30 transition-all duration-300 aspect-video flex flex-col justify-between"
+                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                        className="glass-card rounded-3xl p-8 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/30 transition-all duration-300 aspect-[4/3] flex flex-col justify-between"
                     >
                         <div className="flex justify-between items-start">
-                            <span className="bg-accent/20 text-accent px-2 py-1 rounded text-xs font-bold">
+                            <span className="bg-accent/20 text-accent px-3 py-1.5 rounded-lg text-sm font-bold">
                                 {viz.number}
                             </span>
-                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                                <svg className="w-4 h-4 text-text/70 group-hover:text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            {/* <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                                <svg className="w-5 h-5 text-text/70 group-hover:text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                                 </svg>
-                            </div>
+                            </div> */}
                         </div>
-                        <h3 className="font-heading font-bold text-lg leading-tight line-clamp-3 group-hover:text-accent transition-colors">
+                        <h3 className="font-heading font-bold text-2xl leading-tight line-clamp-4 group-hover:text-accent transition-colors text-left">
                             {viz.question}
                         </h3>
-                        <div className="text-xs text-text/50 uppercase tracking-wider group-hover:text-text/80 transition-colors">
-                            View Details &rarr;
+
+                        <div className="text-sm text-text/50 uppercase tracking-wider group-hover:text-text/80 transition-colors font-medium">
+
                         </div>
                     </motion.div>
                 ))}
             </div>
 
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
                 {selectedId && selectedViz && (
                     <>
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
                             onClick={() => setSelectedId(null)}
-                            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[100]"
+                            className="fixed inset-0 bg-background/90 backdrop-blur-md z-[100]"
                         />
-                        <motion.div
-                            layoutId={`card-${selectedId}`}
-                            className="fixed top-[5%] left-[5%] right-[5%] bottom-[5%] md:top-[10%] md:left-[10%] md:right-[10%] md:bottom-[10%] bg-surface/95 backdrop-blur-xl border border-white/10 rounded-3xl z-[101] overflow-hidden flex flex-col shadow-2xl"
-                        >
-                            {/* Close Button */}
-                            <button
-                                onClick={() => setSelectedId(null)}
-                                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-red-500/20 hover:text-red-500 flex items-center justify-center transition-all z-20"
+                        <div className="fixed inset-0 z-[101] flex items-center justify-center pointer-events-none">
+                            <motion.div
+                                layoutId={`card-${selectedId}`}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 400,
+                                    damping: 35,
+                                    mass: 0.8
+                                }}
+                                className="pointer-events-auto w-full h-full md:w-[90vw] md:h-[90vh] bg-surface/95 backdrop-blur-2xl border border-white/10 md:rounded-3xl overflow-hidden flex flex-col shadow-2xl relative"
                             >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
+                                {/* Close Button */}
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedId(null);
+                                    }}
+                                    className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-red-500/20 hover:text-red-500 flex items-center justify-center transition-all z-50"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
 
-                            {/* Content Container */}
-                            <div className="flex-1 overflow-y-auto p-8 md:p-12">
-                                <div className="max-w-5xl mx-auto">
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.2 }}
-                                    >
-                                        <span className="text-accent font-bold mb-2 block">{selectedViz.number}</span>
-                                        <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">{selectedViz.question}</h2>
+                                {/* Content Container */}
+                                <motion.div
+                                    className="flex-1 overflow-y-auto p-8 md:p-12"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.15 }}
+                                >
+                                    <div className="max-w-7xl mx-auto">
+                                        <span className="text-accent font-bold mb-2 block text-xl">{selectedViz.number}</span>
+                                        <h2 className="text-3xl md:text-5xl font-heading font-bold mb-10">{selectedViz.question}</h2>
 
                                         {/* Observable Visualization Container */}
-                                        <div className="w-full min-h-[500px] bg-white/5 rounded-xl overflow-hidden mb-12 border border-white/5 p-4">
+                                        <div className="w-full min-h-[600px] bg-white rounded-2xl overflow-hidden mb-16 border border-white/5 p-6 flex justify-center items-center text-black shadow-xl">
                                             <ObservableNotebook cellName={selectedViz.cellName} />
                                         </div>
 
                                         {/* Analysis Sections */}
-                                        <div className="grid gap-12 max-w-3xl mx-auto">
-                                            <div>
+                                        <div className="grid md:grid-cols-3 gap-12">
+                                            <div className="glass p-8 rounded-2xl">
                                                 <h3 className="text-xl font-heading font-bold mb-4 text-accent">What We Found</h3>
                                                 <p className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whatWeFound}</p>
                                             </div>
-                                            <div>
-                                                <h3 className="text-xl font-heading font-bold mb-4 text-accent">Why This Visualization Works</h3>
+                                            <div className="glass p-8 rounded-2xl">
+                                                <h3 className="text-xl font-heading font-bold mb-4 text-accent">Why It Works</h3>
                                                 <p className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whyItWorks}</p>
                                             </div>
-                                            <div>
-                                                <h3 className="text-xl font-heading font-bold mb-4 text-accent">What This Actually Means</h3>
+                                            <div className="glass p-8 rounded-2xl">
+                                                <h3 className="text-xl font-heading font-bold mb-4 text-accent">What It Means</h3>
                                                 <p className="text-lg text-text/90 leading-relaxed">{selectedViz.analysis.whatItMeans}</p>
                                             </div>
                                         </div>
-                                    </motion.div>
-                                </div>
-                            </div>
-
-                            {/* Navigation Footer */}
-                            <div className="p-6 border-t border-white/10 flex justify-between items-center bg-surface/50 backdrop-blur-md">
-                                <button
-                                    onClick={handlePrev}
-                                    className="flex items-center gap-2 px-6 py-3 rounded-full hover:bg-white/5 transition-colors text-sm font-medium"
-                                >
-                                    &larr; Previous
-                                </button>
-                                <button
-                                    onClick={handleNext}
-                                    className="flex items-center gap-2 px-6 py-3 rounded-full hover:bg-white/5 transition-colors text-sm font-medium"
-                                >
-                                    Next &rarr;
-                                </button>
-                            </div>
-                        </motion.div>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        </div>
                     </>
                 )}
             </AnimatePresence>

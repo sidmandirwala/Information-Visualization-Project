@@ -21,14 +21,14 @@ const tabs: { id: Tab; label: string }[] = [
 
 export function NavBar({ activeTab, setActiveTab }: NavBarProps) {
     return (
-        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full max-w-[600px] flex justify-center px-4">
-            <nav className="glass-nav rounded-full p-2 flex items-center gap-2">
+        <div className="backdrop-blur-md bg-rgb(17, 23, 41)/10 fixed py-5 left-1/2 -translate-x-1/2 z-50 w-full  flex justify-center px-2 sm:px-4">
+            <nav className="glass-nav rounded-full p-1 sm:p-2 flex items-center gap-1 sm:gap-2">
                 {tabs.map((tab) => (
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
                         className={twMerge(
-                            "relative px-6 py-2 rounded-full text-sm font-medium transition-colors duration-300",
+                            "relative px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 whitespace-nowrap",
                             activeTab === tab.id ? "text-text" : "text-text/70 hover:text-text hover:bg-white/5"
                         )}
                     >

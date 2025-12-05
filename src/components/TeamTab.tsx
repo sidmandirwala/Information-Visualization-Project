@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const teamContent = {
@@ -52,19 +53,13 @@ export function TeamTab() {
                             transition={{ delay: index * 0.2 }}
                             className="flex flex-col items-center text-center group"
                         >
-                            <div className="relative w-48 h-48 mb-6 rounded-full overflow-hidden border-4 border-accent/30 shadow-2xl shadow-accent/10 group-hover:scale-105 group-hover:border-accent/60 group-hover:shadow-accent/30 transition-all duration-500">
-                                <div className="absolute inset-0 bg-surface flex items-center justify-center text-4xl">
-                                    {/* Fallback avatar if image fails or is placeholder */}
-                                    👤
-                                </div>
-                                {/* Uncomment when real images are available
-                <Image
-                  src={member.photo}
-                  alt={member.name}
-                  fill
-                  className="object-cover"
-                />
-                */}
+                            <div className="relative w-48 h-48 mb-6 rounded-full overflow-hidden border-4 border-accent/30 shadow-2xl shadow-accent/10 group-hover:scale-105 group-hover:border-accent/60 group-hover:shadow-accent/30 transition-all duration-500 bg-surface">
+                                <Image
+                                    src={member.photo}
+                                    alt={member.name}
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                             <h3 className="text-2xl font-heading font-bold mb-1">{member.name}</h3>
                             <p className="text-text/50 font-mono text-sm">{member.id}</p>
